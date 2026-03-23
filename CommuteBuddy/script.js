@@ -1,15 +1,12 @@
-const totalGas = document.getElementById('total_gas');
+const gas = document.getElementById('total_gas');
 const seats = document.getElementById('seats');
-const priceDisplay = document.getElementById('price_display');
+const display = document.getElementById('price_display');
 
-if(totalGas && seats){
-    function updatePrice() {
-        const gas = parseFloat(totalGas.value) || 0;
-        const seatCount = parseInt(seats.value) || 1;
-        const price = gas / seatCount;
-        priceDisplay.textContent = price.toFixed(2);
-    }
-
-    totalGas.addEventListener('input', updatePrice);
-    seats.addEventListener('input', updatePrice);
+function update() {
+    const g = parseFloat(gas.value) || 0;
+    const s = parseInt(seats.value) || 1;
+    display.textContent = (g / s).toFixed(2);
 }
+
+gas?.addEventListener('input', update);
+seats?.addEventListener('input', update);
