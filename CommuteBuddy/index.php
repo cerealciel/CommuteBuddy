@@ -8,23 +8,22 @@ include 'db.php';
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
 
-<header class="bg-blue-600 text-white p-4 shadow">
-    <div class="max-w-5xl mx-auto flex justify-between items-center">
-        <h1 class="text-xl font-bold">CommuteBuddy</h1>
-        <nav class="space-x-4">
-            <a href="index.php" class="hover:underline">Home</a>
-            <a href="post_ride.php" class="hover:underline">Post Ride</a>
-            <a href="book_ride.php" class="hover:underline">Book Ride</a>
+<header class="bg-white shadow sticky top-0">
+    <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+        <h1 class="text-2xl font-bold text-blue-600">CommuteBuddy</h1>
+        <nav class="space-x-6">
+            <a href="index.php">Home</a>
+            <a href="post_ride.php">Post Ride</a>
+            <a href="book_ride.php">Book Ride</a>
         </nav>
     </div>
 </header>
 
-<main class="max-w-5xl mx-auto mt-8 p-6 bg-white rounded-xl shadow">
+<main class="max-w-6xl mx-auto mt-10 px-4">
 
-<!-- RIDES -->
-<h2 class="text-2xl font-semibold mb-4">Available Rides</h2>
+<h2 class="text-3xl font-bold mb-6">Available Rides</h2>
 
 <?php
 $sql = "SELECT rides.*, users.firstname, users.lastname 
@@ -34,50 +33,44 @@ $sql = "SELECT rides.*, users.firstname, users.lastname
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo '<div class="grid gap-4">';
+    echo '<div class="grid md:grid-cols-2 gap-6">';
     while($row = $result->fetch_assoc()) {
         echo "
-        <div class='border rounded-lg p-4 shadow-sm hover:shadow-md'>
+        <div class='bg-white p-5 rounded-2xl shadow'>
 
-            <p class='font-semibold text-lg'>
-                {$row['firstname']} {$row['lastname']}
-            </p>
+            <div class='flex justify-between'>
+                <div>
+                    <p class='font-semibold'>{$row['firstname']} {$row['lastname']}</p>
+                </div>
+                <span class='text-blue-600 font-bold'>₱ {$row['seat_price']}</span>
+            </div>
 
-            <p class='text-gray-600'>Destination: {$row['destination']}</p>
+            <p class='text-gray-600 mt-2'>Destination: {$row['destination']}</p>
             <p class='text-gray-600'>Departure: {$row['departure_time']}</p>
 
-            <p class='text-blue-600 font-bold mt-2'>
-                ₱ {$row['seat_price']} per seat
-            </p>
-
-            <div class='mt-3 flex gap-2'>
-
-                <!-- EDIT BUTTON -->
+            <div class='mt-4 flex gap-2'>
                 <a href='edit_ride.php?id={$row['ride_id']}'
-                   class='bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600'>
+                   class='flex-1 bg-yellow-500 text-white text-center py-2 rounded'>
                    Edit
                 </a>
 
-                <!-- DELETE BUTTON -->
-                <form method='POST' action='delete_ride.php'>
+                <form method='POST' action='delete_ride.php' class='flex-1'>
                     <input type='hidden' name='ride_id' value='{$row['ride_id']}'>
-                    <button class='bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600'>
+                    <button class='w-full bg-red-500 text-white py-2 rounded'>
                         Delete
                     </button>
                 </form>
-
             </div>
 
         </div>";
     }
     echo '</div>';
 } else {
-    echo "<p class='text-gray-500'>No rides available.</p>";
+    echo "No rides available.";
 }
 ?>
 
-<!-- BOOKINGS -->
-<h2 class="text-2xl font-semibold mt-8 mb-4">Bookings</h2>
+<h2 class="text-3xl font-bold mt-10 mb-6">Bookings</h2>
 
 <?php
 $sql = "SELECT bookings.*, users.firstname, rides.destination
@@ -88,20 +81,20 @@ $sql = "SELECT bookings.*, users.firstname, rides.destination
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<div class='grid gap-4'>";
+    echo "<div class='grid md:grid-cols-2 gap-6'>";
     while($row = $result->fetch_assoc()) {
         echo "
-        <div class='border rounded-lg p-4 shadow-sm flex justify-between items-center'>
+        <div class='bg-white p-5 rounded-2xl shadow flex justify-between'>
 
             <div>
-                <p><span class='font-semibold'>Rider:</span> {$row['firstname']}</p>
-                <p><span class='font-semibold'>Destination:</span> {$row['destination']}</p>
-                <p class='text-green-600 font-bold'>Status: {$row['booking_status']}</p>
+                <p class='font-semibold'>{$row['firstname']}</p>
+                <p class='text-gray-600 text-sm'>Destination: {$row['destination']}</p>
+                <p class='text-green-600 text-sm'>{$row['booking_status']}</p>
             </div>
 
             <form method='POST' action='delete_booking.php'>
                 <input type='hidden' name='booking_id' value='{$row['booking_id']}'>
-                <button class='bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600'>
+                <button class='bg-red-500 text-white px-3 py-1 rounded'>
                     Delete
                 </button>
             </form>
@@ -110,11 +103,10 @@ if ($result->num_rows > 0) {
     }
     echo "</div>";
 } else {
-    echo "<p class='text-gray-500'>No bookings yet.</p>";
+    echo "No bookings yet.";
 }
 ?>
 
 </main>
-
 </body>
 </html>

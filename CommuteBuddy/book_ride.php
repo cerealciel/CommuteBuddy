@@ -16,52 +16,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt2->execute();
     $stmt2->close();
 
-    echo "<div class='max-w-xl mx-auto mt-4 p-4 bg-green-100 text-green-700 rounded'>Booking confirmed!</div>";
+    echo "<div class='max-w-xl mx-auto mt-4 p-4 bg-green-100 text-green-700 rounded'>Booked!</div>";
 }
 
-$rides_result = $conn->query("SELECT ride_id, destination FROM rides");
+$rides = $conn->query("SELECT ride_id, destination FROM rides");
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Book Ride</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gray-100">
 
-<header class="bg-blue-600 text-white p-4 shadow">
-    <div class="max-w-5xl mx-auto">
-        <a href="index.php" class="underline">← Back</a>
-    </div>
+<header class="bg-white shadow p-4">
+<a href="index.php">← Back</a>
 </header>
 
-<main class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-xl shadow">
-
-<h2 class="text-2xl font-semibold mb-4">Book a Ride</h2>
+<main class="max-w-xl mx-auto mt-10 bg-white p-6 rounded-2xl shadow">
 
 <form method="POST" class="space-y-4">
 
-    <input type="text" name="rider_name" placeholder="Your Name"
-        class="w-full p-2 border rounded">
+<input name="rider_name" placeholder="Your Name" class="w-full p-3 border rounded">
 
-    <select name="ride_id" class="w-full p-2 border rounded">
-        <?php while($row = $rides_result->fetch_assoc()): ?>
-            <option value="<?= $row['ride_id'] ?>">
-                <?= $row['destination'] ?>
-            </option>
-        <?php endwhile; ?>
-    </select>
+<select name="ride_id" class="w-full p-3 border rounded">
+<?php while($r = $rides->fetch_assoc()): ?>
+<option value="<?= $r['ride_id'] ?>"><?= $r['destination'] ?></option>
+<?php endwhile; ?>
+</select>
 
-    <button type="submit"
-        class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
-        Book Ride
-    </button>
+<button class="w-full bg-blue-600 text-white p-3 rounded">Book</button>
 
 </form>
 
 </main>
-
 </body>
 </html>

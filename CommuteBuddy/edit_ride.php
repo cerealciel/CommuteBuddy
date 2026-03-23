@@ -17,45 +17,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     header("Location: index.php");
-    exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Ride</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gray-100">
 
-<main class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-xl shadow">
-
-<h2 class="text-2xl font-semibold mb-4">Edit Ride</h2>
+<main class="max-w-xl mx-auto mt-10 bg-white p-6 rounded-2xl shadow">
 
 <form method="POST" class="space-y-4">
 
-    <input type="text" name="destination"
-        value="<?= $ride['destination'] ?>"
-        class="w-full p-2 border rounded">
+<input name="destination" value="<?= $ride['destination'] ?>" class="w-full p-3 border rounded">
+<input type="datetime-local" name="departure_time"
+value="<?= date('Y-m-d\TH:i', strtotime($ride['departure_time'])) ?>"
+class="w-full p-3 border rounded">
 
-    <input type="datetime-local" name="departure_time"
-        value="<?= date('Y-m-d\TH:i', strtotime($ride['departure_time'])) ?>"
-        class="w-full p-2 border rounded">
+<input name="seat_price" value="<?= $ride['seat_price'] ?>" class="w-full p-3 border rounded">
 
-    <input type="number" step="0.01" name="seat_price"
-        value="<?= $ride['seat_price'] ?>"
-        class="w-full p-2 border rounded">
-
-    <button type="submit"
-        class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
-        Update Ride
-    </button>
+<button class="w-full bg-blue-600 text-white p-3 rounded">Update</button>
 
 </form>
 
 </main>
-
 </body>
 </html>
