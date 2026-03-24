@@ -1,0 +1,165 @@
+:root {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --primary: #2c3e50;
+    --accent: #0984e3;
+    --accent-hover: #00cec9;
+    --text: #2d3436;
+    --muted: #7f8c8d;
+    --border: #e1e4ea;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, var(--primary), #34495e);
+    color: white;
+    padding: 20px 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Navigation */
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #ecf0f1;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.2s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Main container */
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    background: var(--surface);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* Headings */
+h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+/* Form */
+form input,
+form select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 24px 0; /* More breathing room */
+    display: block;       /* Forces label text to sit above input */
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(9, 132, 227, 0.1);
+}
+
+/* Feature: Price Display */
+#price_display {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.25rem;
+    background: #e1f0fd;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* Button */
+input[type="submit"] {
+    background: var(--accent);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 14px;
+    transition: all 0.2s ease;
+}
+
+input[type="submit"]:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+table th {
+    background: #ecf0f1;
+    font-weight: 600;
+}
+
+table th,
+table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+table tr:hover {
+    background: #f9fbfd;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
