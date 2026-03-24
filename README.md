@@ -69,15 +69,11 @@ Open XAMPP and start:
 - Apache
 - MySQL
 
----
-
 ### 4. Setup Database
 
 1. Open phpMyAdmin: http://localhost/phpmyadmin
 2. Create a new database: commute_db
 3. Import the SQL file: database/commute_db.sql
-
----
 
 ### 5. Run the System
 
