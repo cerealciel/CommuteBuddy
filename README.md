@@ -1,4 +1,4 @@
-# CommuteBuddy – Campus Ride-Sharing System
+# CommuteBuddy Campus Ride-Sharing System
 
 ## Overview
 CommuteBuddy is a full-stack web application that allows students to share rides and split gas costs. Drivers can post available rides, and riders can book seats easily.
